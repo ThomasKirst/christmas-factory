@@ -18,7 +18,7 @@ function App() {
   );
 
   async function fetchProducts() {
-    const result = await fetch('http://localhost:4000/products');
+    const result = await fetch('api/products');
     const resultJson = await result.json();
     setProducts(resultJson);
   }
@@ -34,7 +34,7 @@ function App() {
   }, [favouriteProducts]);
 
   async function addProductToDatabase(product) {
-    const result = await fetch('http://localhost:4000/products', {
+    const result = await fetch('api/products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

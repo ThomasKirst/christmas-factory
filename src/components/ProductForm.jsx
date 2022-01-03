@@ -26,9 +26,16 @@ export default function ProductForm({ onAddProduct }) {
   const [hasFormErrors, setHasFormErrors] = useState(false);
 
   useEffect(() => {
-    fetch('http://localhost:4000/categories')
-      .then((result) => result.json())
-      .then((categoriesFromApi) => setCategories(categoriesFromApi));
+    async function getCategories() {
+      try {
+        const response = await fetch('api/categories');
+        const categoriesFromApi = await response.json();
+        setCategories(categoriesFromApi);
+      } catch (error) {
+        console.log(error.message);
+      }
+    }
+    getCategories();
   }, []);
 
   const handleChange = (event) => {
